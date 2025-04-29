@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid py-5 bg-light min-vh-100 d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card shadow-lg rounded-4 border-0">
+                    <div class="card-body p-5">
+
+                        <h1 class="card-title text-center mb-5 fw-bold display-5 text-success">
+                            📈 Prediction Results for <span class="text-primary">{{ stock }}</span>
+                        </h1>
+
+                        {% if error %}
+                            <div class="alert alert-danger text-center fs-4 py-4 rounded-3">
+                                {{ error }}
+                            </div>
+                        {% else %}
+
+                            <!-- Statistics Panel -->
+                            <div class="row g-4 mb-5">
+                                <div class="col-md-4">
+                                    <div class="p-4 rounded-4 shadow-sm text-center bg-white border-start border-4 border-primary">
+                                        <h6 class="text-muted">MSE</h6>
+                                        <h2 class="text-primary">{{ mse }}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-4 rounded-4 shadow-sm text-center bg-white border-start border-4 border-success">
+                                        <h6 class="text-muted">RMSE</h6>
+                                        <h2 class="text-success">{{ rmse }}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="p-4 rounded-4 shadow-sm text-center bg-white border-start border-4 border-warning">
+                                        <h6 class="text-muted">R² Score(Accuracy in %)</h6>
+                                        <h2 class="text-warning">{{ r2_score }}</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Line Chart Sections -->
+                            <section class="mb-5">
+                                <h3 class="text-dark mb-3 fw-semibold">📊 Original Closing Prices Over Time</h3>
+                                <img src="{{ original_plot }}" class="img-fluid rounded-4 shadow-sm">
+                            </section>
+
+                            <section class="mb-5">
+                                <h3 class="text-dark mb-3 fw-semibold">🔍 Original vs Predicted Test Data</h3>
+                                <img src="{{ predicted_plot }}" class="img-fluid rounded-4 shadow-sm">
+                            </section>
+
+                            <section class="mb-5">
+                                <h3 class="text-dark mb-3 fw-semibold">🚀 Future Close Price Predictions</h3>
+                                <img src="{{ future_plot }}" class="img-fluid rounded-4 shadow-sm">
+                            </section>
+
+                            <!-- Future Predictions Table -->
+                            <section class="table-responsive mt-5">
+                                <h4 class="text-primary mb-4">📅 Detailed Future Predictions</h4>
+                                <table class="table table-hover table-bordered align-middle rounded-4 overflow-hidden shadow-sm">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th class="text-center fs-5">Day</th>
+                                            <th class="text-center fs-5">Predicted Close Price (USD)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for day, price in enumerate(future_predictions, start=1) %}
+                                        <tr>
+                                            <td class="text-center fs-6">{{ day }}</td>
+                                            <td class="text-center fs-6">${{ "%.4f"|format(price) }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </section>
+
+                            <!-- Info Sections -->
+                            <section class="mt-5">
+                                <div class="p-4 bg-white rounded-4 shadow-sm">
+                                    <h4 class="text-success mb-3">🔬 About This Prediction Model</h4>
+                                    <p class="text-muted">
+                                        This LSTM-based model analyzes sequential stock data to uncover hidden temporal patterns,
+                                        offering highly contextualized predictions. It's optimized for minimizing mean squared error.
+                                    </p>
+                                </div>
+                            </section>
+
+                            <section class="mt-4">
+                                <div class="p-4 bg-white rounded-4 shadow-sm">
+                                    <h4 class="text-info mb-3">🧠 How to Interpret the Results</h4>
+                                    <ul class="text-muted small">
+                                        <li>📈 Focus on the long-term trend over short-term noise.</li>
+                                        <li>⏳ Prediction uncertainty increases the further into the future we go.</li>
+                                        <li>📚 Use predictions alongside technical & fundamental analysis before making decisions.</li>
+                                    </ul>
+                                </div>
+                            </section>
+
+                        {% endif %}
+
+                        <!-- Back Button -->
+                        <div class="text-center mt-5">
+                            <a href="/" class="btn btn-outline-primary btn-lg rounded-4 py-3">
+                                ⬅️ Back to Home
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

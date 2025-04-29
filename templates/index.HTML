@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid bg-light min-vh-150 d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg rounded-4 border-0">
+                    <div class="card-body p-5">
+                        <h1 class="card-title text-center mb-4 fw-bold display-10 text-primary">
+                        Welcome to Crypto Prophet
+                        </h1>
+                        <p class="text-center text-muted mb-5 fs-5">
+                            Predict the future prices of your favorite cryptocurrencies with the power of AI.<br>
+                            Enter the crypto you're interested in, select the prediction days, and get an instant forecast.
+                        </p>
+
+                        <form method="post" action="/" class="needs-validation" novalidate>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label for="stock" class="form-label fw-semibold">Select Cryptocurrency</label>
+                                    <select class="form-select rounded-3" id="stock" name="stock" required>
+                                        <option value="" disabled selected>Select a cryptocurrency</option>
+                                        <option value="BTC-USD">Bitcoin (BTC)</option>
+                                        <option value="ETH-USD">Ethereum (ETH)</option>
+                                        <option value="DOGE-USD">Dogecoin (DOGE)</option>
+                                        <option value="XRP-USD">Ripple (XRP)</option>
+                                        <option value="SOL-USD">Solana (SOL)</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a cryptocurrency.
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="no_of_days" class="form-label fw-semibold">Prediction Days</label>
+                                    <input type="number" class="form-control rounded-3" id="no_of_days" name="no_of_days" min="1" max="15" value="10" required>
+                                    <div class="invalid-feedback">
+                                        Please enter a number between 1 and 15.
+                                    </div>
+                                </div>
+
+                                <div class="col-12 d-grid mt-4">
+                                    <button type="submit" class="btn btn-lg btn-primary rounded-3 py-3">
+                                       Predict Now
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <hr class="my-5">
+
+                        <div class="text-center text-muted small">
+                           
+                            <p>Disclaimer: This is for educational purposes only and not financial advice.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Bootstrap validation script
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
+{% endblock %}
