@@ -4,7 +4,7 @@
 
 ## 🚀 Features
 
-- 📈 Predicts future prices for cryptocurrencies like Bitcoin (BTC)
+- 📈 Predicts future prices for cryptocurrencies like Bitcoin (BTC), Ethereum(ETH), Dogecoin (DOGE) etc.
 - 🧠 Built with LSTM — a type of Recurrent Neural Network (RNN) suitable for time-series forecasting
 - 🗃️ Trained on real historical market data (e.g., from Yahoo Finance)
 - 📊 Visualizes actual vs. predicted prices
